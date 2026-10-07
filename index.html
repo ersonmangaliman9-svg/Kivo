@@ -1,0 +1,759 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#040813"><script>(function(){var t=null;try{t=localStorage.getItem("kivo-theme")}catch(e){}if(t!=="light"&&t!=="dark"){t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"}document.documentElement.setAttribute("data-theme",t);var m=document.querySelector("meta[name=theme-color]");if(m)m.content=t==="light"?"#f4f7fd":"#040813"})()</script><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>KIVO Software Business Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Manrope:wght@400;500;600;700&family=Caveat:wght@600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: dark circuit-board stage. Animated trace canvas sits behind everything; hero splits wordmark + rotating logo disc; projects alternate video left/right. */
+:root{
+  --bg:#040813;
+  --bg-2:#0a1226;
+  --panel:#0c1630;
+  --fg:#eaf1ff;
+  --muted:#8fa3c7;
+  --blue:#2f7bff;
+  --cyan:#35d0ff;
+  --line:rgba(110,160,255,.18);
+  --orange:#ff9a2e;
+  --f-display:'Sora','Segoe UI',system-ui,sans-serif;
+  --f-body:'Manrope','Segoe UI',system-ui,sans-serif;
+  --f-script:'Caveat','Segoe Script',cursive;
+  --f-mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+  --nh:68px;
+  --gutter:clamp(16px,5vw,56px);
+  --nav-bg:rgba(4,8,19,.72);--nav-bg-2:rgba(4,8,19,.9);--menu-bg:rgba(4,8,19,.97);
+  --marq-bg:rgba(10,18,38,.6);
+  --card-bg:linear-gradient(160deg,rgba(14,26,56,.85),rgba(8,14,32,.85));
+  --contact-bg:radial-gradient(900px circle at 85% 0%,rgba(47,123,255,.25),transparent 60%),linear-gradient(160deg,#0c1836,#060c1e);
+  --chat-bg:linear-gradient(170deg,#0d1a3a,#060c1e);--chat-f-bg:rgba(4,8,19,.6);
+  --chip-fg:#bcd0f5;--quick-fg:#cfe0ff;--input-bg:rgba(255,255,255,.06);
+  --bg-rgb:4,8,19;--shadow:rgba(0,0,0,.9);--tint:rgba(47,123,255,.14);--tint-2:rgba(47,123,255,.1);
+  --glow-a:rgba(47,123,255,.22);--glow-b:rgba(53,208,255,.14);--ring:rgba(110,160,255,.22);
+  --on-accent:#031024;--phone-bg:linear-gradient(140deg,#1b2d5a,#0a1226 50%,#1b2d5a);
+  color-scheme:dark;
+}
+:root[data-theme=light]{
+  --bg:#f4f7fd;--bg-2:#ffffff;--panel:#ffffff;--fg:#0b1530;--muted:#4a5b7d;
+  --blue:#1f63e0;--cyan:#0a86b8;--line:rgba(30,70,160,.18);--orange:#c96a0a;
+  --nav-bg:rgba(244,247,253,.78);--nav-bg-2:rgba(244,247,253,.94);--menu-bg:rgba(244,247,253,.98);
+  --marq-bg:rgba(255,255,255,.7);
+  --card-bg:linear-gradient(160deg,#ffffff,#eef3fc);
+  --contact-bg:radial-gradient(900px circle at 85% 0%,rgba(31,99,224,.16),transparent 60%),linear-gradient(160deg,#ffffff,#e8effb);
+  --chat-bg:linear-gradient(170deg,#ffffff,#eef3fc);--chat-f-bg:rgba(244,247,253,.9);
+  --chip-fg:#24407f;--quick-fg:#24407f;--input-bg:rgba(11,21,48,.05);
+  --bg-rgb:244,247,253;--shadow:rgba(30,50,110,.28);--tint:rgba(31,99,224,.1);--tint-2:rgba(31,99,224,.08);
+  --glow-a:rgba(31,99,224,.14);--glow-b:rgba(10,134,184,.1);--ring:rgba(30,70,160,.22);
+  --on-accent:#ffffff;--phone-bg:linear-gradient(140deg,#c9d8f5,#eef3fc 50%,#c9d8f5);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+html.scrolled{--nh:56px}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.65;padding-inline:0;overflow-x:hidden;margin:0}
+a{color:inherit}
+img,video{max-width:100%;display:block}
+h1,h2,h3{font-family:var(--f-display);line-height:1.08;margin:0;text-wrap:balance;letter-spacing:-.02em}
+p{margin:0}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6px}
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.glow{position:fixed;z-index:0;pointer-events:none;width:60vmax;height:60vmax;left:-20vmax;top:-25vmax;background:radial-gradient(closest-side,var(--glow-a),transparent);}
+.glow.b{left:auto;right:-25vmax;top:auto;bottom:-30vmax;background:radial-gradient(closest-side,var(--glow-b),transparent)}
+main,footer{position:relative;z-index:1}
+main{overflow-x:clip}
+html{overflow-x:clip}
+header.nav{position:sticky;z-index:50}
+.wrap{width:100%;max-width:1180px;margin-inline:auto;padding-inline:var(--gutter)}
+.eyebrow{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);display:flex;align-items:center;gap:.8rem}
+.eyebrow::before{content:"";width:34px;height:1px;background:linear-gradient(90deg,var(--cyan),transparent)}
+.grad{background:linear-gradient(100deg,var(--blue),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--nav-bg);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{transition:transform .45s cubic-bezier(.2,.8,.2,1),background .3s,box-shadow .3s;animation:navin .9s cubic-bezier(.2,.8,.2,1) backwards}
+.nav.scrolled{background:var(--nav-bg-2);box-shadow:0 12px 40px -18px var(--shadow),0 1px 0 rgba(53,208,255,.18)}
+.nav.hide{transform:translateY(-110%)}
+.nav::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));transform-origin:left;transform:scaleX(var(--p,0));box-shadow:0 0 12px var(--cyan)}
+@keyframes navin{from{transform:translateY(-100%);opacity:0}to{transform:none;opacity:1}}
+@keyframes itemin{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:var(--nh);gap:1rem;transition:height .35s cubic-bezier(.2,.8,.2,1)}
+.brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;font-family:var(--f-display);font-weight:800;letter-spacing:.06em}
+.brand img{width:38px;height:38px;border-radius:50%;transition:transform .6s cubic-bezier(.2,.8,.2,1),width .35s,height .35s}
+.brand:hover img{transform:rotate(360deg)}
+html.scrolled .brand img{width:32px;height:32px}
+.menu{display:flex;gap:.4rem;align-items:center;list-style:none;margin:0;padding:0}
+.menu li{animation:itemin .7s cubic-bezier(.2,.8,.2,1) backwards}
+.menu li:nth-child(1){animation-delay:.35s}.menu li:nth-child(2){animation-delay:.45s}.menu li:nth-child(3){animation-delay:.55s}
+.menu a{position:relative;display:block;text-decoration:none;padding:.5rem .9rem;border-radius:999px;font-weight:600;font-size:.92rem;color:var(--muted);transition:color .2s,background .2s}
+.menu a:not(.cta)::after{content:"";position:absolute;left:.9rem;right:.9rem;bottom:.2rem;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.menu a:not(.cta):hover::after,.menu a.active::after{transform:scaleX(1)}
+.menu a.active{color:var(--fg)}
+.menu a:hover{color:var(--fg);background:var(--tint)}
+.menu a.cta.active{box-shadow:0 0 0 3px rgba(53,208,255,.35)}
+.menu a.cta{background:linear-gradient(100deg,var(--blue),var(--cyan));color:var(--on-accent);font-weight:700}
+.menu a.cta:hover{filter:brightness(1.1);color:var(--on-accent)}
+.burger{display:none;background:none;border:1px solid var(--line);color:var(--fg);width:44px;height:44px;border-radius:12px;cursor:pointer;font-size:1.2rem}
+@media(max-width:760px){
+  .burger{display:block}
+  .menu{position:absolute;left:0;right:0;top:var(--nh);flex-direction:column;align-items:stretch;background:var(--menu-bg);border-bottom:1px solid var(--line);padding:.8rem var(--gutter) 1.2rem;display:none}
+  .menu.open{display:flex}
+  .menu a{padding:.9rem 1rem;font-size:1rem}
+}
+
+/* theme toggle */
+.nav-r{display:flex;align-items:center;gap:.6rem}
+.theme-toggle{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--tint-2);color:var(--fg);cursor:pointer;transition:background .2s,border-color .2s,transform .3s}
+.theme-toggle:hover{background:var(--tint);border-color:var(--cyan);transform:rotate(14deg)}
+.theme-toggle svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.theme-toggle .i-sun{display:none}
+:root[data-theme=light] .theme-toggle .i-sun{display:block}
+:root[data-theme=light] .theme-toggle .i-moon{display:none}
+html.theme-anim *,html.theme-anim *::before,html.theme-anim *::after{transition:background-color .35s,color .35s,border-color .35s,fill .35s,stroke .35s!important}
+:root[data-theme=light] .disc img{box-shadow:0 0 70px -12px rgba(31,99,224,.45)}
+:root[data-theme=light] .frame.phone{border-color:rgba(31,99,224,.3)}
+:root[data-theme=light] .frame{box-shadow:0 30px 80px -30px rgba(31,99,224,.35)}
+:root[data-theme=light] .chat-fab,:root[data-theme=light] .btn.primary{box-shadow:0 10px 30px -10px rgba(31,99,224,.5)}
+/* hero */
+.hero{padding-block:clamp(40px,8vw,96px) clamp(48px,8vw,100px)}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,5vw,64px);align-items:center}
+.hero-copy{min-width:0;display:flex;flex-direction:column;gap:1.5rem}
+.hero h1{font-size:clamp(2.3rem,6.2vw,4.7rem);font-weight:800}
+.hero h1 .w{display:inline-block;animation:rise .9s cubic-bezier(.2,.8,.2,1) backwards}
+.hero h1 .w:nth-child(1){animation-delay:.05s}.hero h1 .w:nth-child(2){animation-delay:.14s}.hero h1 .w:nth-child(3){animation-delay:.23s}.hero h1 .w:nth-child(4){animation-delay:.32s}.hero h1 .w:nth-child(5){animation-delay:.41s}.hero h1 .w:nth-child(6){animation-delay:.5s}
+@keyframes rise{from{opacity:0;transform:translateY(40px) rotateX(-40deg)}to{opacity:1;transform:none}}
+.script{font-family:var(--f-script);font-size:clamp(1.7rem,4vw,2.4rem);font-weight:600;line-height:1.1;transform:rotate(-2deg);transform-origin:left}
+.lede{font-size:clamp(1.02rem,2vw,1.2rem);color:var(--muted);max-width:52ch}
+.btns{display:flex;flex-wrap:wrap;gap:.8rem}
+.btn{display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;font-weight:700;padding:.95rem 1.5rem;border-radius:999px;border:1px solid var(--line);transition:transform .2s,box-shadow .2s,background .2s;font-family:var(--f-body);font-size:1rem;cursor:pointer;color:var(--fg);background:transparent}
+.btn:hover{transform:translateY(-2px)}
+.btn.primary{background:linear-gradient(100deg,var(--blue),var(--cyan));color:var(--on-accent);border-color:transparent;box-shadow:0 10px 36px -10px rgba(53,208,255,.6)}
+.btn.ghost:hover{background:var(--tint)}
+.disc{position:relative;justify-self:center;width:min(100%,430px);aspect-ratio:1}
+.disc img{position:absolute;inset:7%;width:86%;height:86%;border-radius:50%;animation:float 6s ease-in-out infinite;box-shadow:0 0 90px -10px rgba(47,123,255,.7)}
+.disc .ring{position:absolute;inset:0;border-radius:50%;border:1px dashed rgba(53,208,255,.45);animation:spin 28s linear infinite}
+.disc .ring.r2{inset:-5%;border:1px solid rgba(47,123,255,.25);animation-duration:44s;animation-direction:reverse}
+.disc .ring i{position:absolute;top:-5px;left:50%;width:10px;height:10px;border-radius:50%;background:var(--cyan);box-shadow:0 0 16px 3px var(--cyan)}
+.disc .ring.r2 i{background:var(--blue);box-shadow:0 0 16px 3px var(--blue);top:auto;bottom:-5px}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes float{50%{transform:translateY(-10px)}}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}.disc{order:-1;width:min(70%,300px)}}
+
+/* marquee */
+.marquee{border-block:1px solid var(--line);background:var(--marq-bg);overflow:hidden;position:relative;z-index:1}
+.track{display:flex;width:max-content;animation:slide 32s linear infinite}
+.track span{font-family:var(--f-display);font-weight:700;font-size:clamp(1rem,2.4vw,1.35rem);padding:1rem 1.6rem;white-space:nowrap;color:var(--muted);display:flex;align-items:center;gap:3.2rem}
+.track span::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* sections */
+section{padding-block:clamp(64px,10vw,120px)}
+.head{display:flex;flex-direction:column;gap:1rem;margin-bottom:clamp(32px,5vw,56px);max-width:760px}
+.head h2{font-size:clamp(1.9rem,4.6vw,3.2rem);font-weight:800}
+.head p{color:var(--muted);font-size:1.08rem}
+
+/* about KIVO */
+.card{position:relative;min-width:0;border:1px solid var(--line);border-radius:22px;padding:1.8rem;background:var(--card-bg);overflow:hidden;transition:border-color .3s,transform .3s}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(320px circle at var(--mx,50%) var(--my,0%),rgba(53,208,255,.16),transparent 60%);opacity:0;transition:opacity .3s;pointer-events:none}
+.card:hover{border-color:rgba(53,208,255,.5);transform:translateY(-4px)}
+.card:hover::before{opacity:1}
+.card .ico{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;margin-bottom:1.2rem;background:var(--tint);border:1px solid var(--line)}
+.card .ico svg{width:26px;height:26px;stroke:var(--cyan);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.card h3{font-size:1.25rem;margin-bottom:.6rem;font-weight:700}
+.card p{color:var(--muted);font-size:.98rem}
+.statement{margin-top:clamp(28px,4vw,48px);font-family:var(--f-display);font-size:clamp(1.25rem,3vw,2rem);font-weight:600;line-height:1.3;max-width:30ch;letter-spacing:-.01em}
+
+/* projects */
+.project{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,64px);align-items:center;padding-block:clamp(28px,5vw,56px);border-top:1px solid var(--line)}
+.project:first-of-type{border-top:0;padding-top:0}
+.project.flip .media{order:2}
+.pcopy{min-width:0;display:flex;flex-direction:column;gap:1.1rem}
+.pcopy .tag{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:var(--orange)}
+.pcopy h3{font-size:clamp(1.7rem,3.6vw,2.5rem);font-weight:800}
+.pcopy p{color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0;padding:0}
+.chips li{font-family:var(--f-mono);font-size:.76rem;padding:.35rem .8rem;border-radius:999px;border:1px solid var(--line);background:var(--tint-2);color:var(--chip-fg)}
+.media{min-width:0;position:relative;display:flex;justify-content:center}
+.frame{position:relative;border-radius:22px;padding:8px;background:linear-gradient(140deg,rgba(53,208,255,.55),rgba(47,123,255,.15) 40%,rgba(47,123,255,.5));box-shadow:0 30px 80px -30px rgba(47,123,255,.6);width:100%}
+.frame video{width:100%;border-radius:15px;background:#000;display:block}
+.frame.phone{width:min(100%,330px);border-radius:40px;padding:10px;background:var(--phone-bg);border:1px solid rgba(53,208,255,.35)}
+.frame.phone video{border-radius:30px;aspect-ratio:9/16;object-fit:cover}
+.frame.wide video{aspect-ratio:16/9}
+.hint{font-family:var(--f-mono);font-size:.72rem;color:var(--muted);margin-top:.7rem;text-align:center}
+.media-col{display:flex;flex-direction:column;align-items:center;width:100%;min-width:0}
+@media(max-width:860px){.project{grid-template-columns:1fr}.project.flip .media{order:0}}
+
+/* merged about: sticky full-height portrait + scrolling story */
+.about{padding-block:0}
+.about-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}
+.about-text{padding:clamp(56px,9vw,110px) var(--gutter) clamp(56px,9vw,110px) max(var(--gutter),calc((100vw - 1180px)/2 + var(--gutter)));display:flex;flex-direction:column;gap:clamp(28px,4vw,44px);min-width:0}
+.about-text .head{margin:0}
+.stack{display:grid;gap:1rem}
+.stack .card{padding:1.3rem 1.5rem;display:grid;grid-template-columns:50px 1fr;gap:0 1.1rem;align-items:start}
+.stack .card .ico{margin:0;grid-row:1/3}
+.stack .card h3{margin:0 0 .3rem;font-size:1.12rem}
+.erson-block{display:flex;flex-direction:column;gap:1rem;padding-top:clamp(24px,4vw,40px);border-top:1px solid var(--line)}
+.erson-block h3{font-size:clamp(1.9rem,4.4vw,3rem);font-weight:800}
+.role{font-family:var(--f-mono);color:var(--cyan);letter-spacing:.14em;text-transform:uppercase;font-size:.85rem}
+.erson-block p{color:var(--muted);max-width:56ch}
+.shot{position:sticky;top:calc(var(--nh) + env(safe-area-inset-top,0px));height:calc(100vh - var(--nh));height:calc(100svh - var(--nh));min-height:460px;overflow:hidden;min-width:0}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:50% 18%;animation:push 14s ease-in-out infinite alternate}
+@keyframes push{from{transform:scale(1)}to{transform:scale(1.06)}}
+.shot::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,var(--bg) 0%,transparent 22%),linear-gradient(0deg,rgba(var(--bg-rgb),.92) 0%,transparent 38%)}
+.shot .tagline{position:absolute;z-index:2;left:clamp(20px,4vw,48px);right:20px;bottom:clamp(20px,4vw,44px);display:flex;flex-direction:column;gap:.2rem}
+.shot .tagline strong{font-family:var(--f-display);font-size:clamp(1.5rem,3.4vw,2.4rem);font-weight:800;letter-spacing:-.02em}
+.shot .tagline span{font-family:var(--f-mono);font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan)}
+@media(max-width:860px){
+  .about-split{grid-template-columns:1fr}
+  .shot{position:relative;top:auto;height:82svh;min-height:420px;order:-1}
+  .shot::before{background:linear-gradient(0deg,var(--bg) 0%,rgba(var(--bg-rgb),.5) 25%,transparent 55%)}
+  .about-text{padding:clamp(32px,8vw,56px) var(--gutter) 64px}
+}
+
+/* contact */
+.contact{border:1px solid var(--line);border-radius:30px;padding:clamp(28px,6vw,72px);background:var(--contact-bg);display:flex;flex-direction:column;gap:1.6rem;position:relative;overflow:hidden}
+.contact h2{font-size:clamp(2rem,5.4vw,3.8rem);font-weight:800;max-width:16ch}
+.mail{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center}
+.mail a.addr{font-family:var(--f-display);font-weight:700;font-size:clamp(1.05rem,3.6vw,1.9rem);overflow-wrap:anywhere;text-decoration:none;border-bottom:2px solid var(--cyan);padding-bottom:2px;user-select:all}
+.mail a.addr:hover{color:var(--cyan)}
+.copy{font-family:var(--f-mono);font-size:.8rem}
+.links{display:flex;flex-wrap:wrap;gap:.8rem}
+footer{padding-block:32px calc(32px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center}
+footer a{color:var(--cyan);text-decoration:none}
+
+/* parallax: uses the individual translate property so it never fights reveal/float transforms */
+[data-speed]{translate:0 var(--py,0px);will-change:translate}
+.glow{translate:0 var(--gy,0px)}
+
+/* scroll-to-top + assistant */
+.fab-wrap{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:70;display:flex;flex-direction:column;align-items:flex-end;gap:12px;pointer-events:none}
+.fab-wrap>*{pointer-events:auto}
+.totop{position:relative;width:48px;height:48px;border-radius:50%;border:0;cursor:pointer;color:var(--fg);background:conic-gradient(var(--cyan) calc(var(--p2,0)*1turn),var(--ring) 0);display:grid;place-items:center;opacity:0;transform:translateY(14px) scale(.8);pointer-events:none;transition:opacity .35s,transform .35s cubic-bezier(.2,.8,.2,1)}
+.chat-open .totop{opacity:0!important;pointer-events:none!important;transform:translateY(14px) scale(.8)}
+.totop.show{opacity:1;transform:none;pointer-events:auto}
+.totop::before{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--bg-2)}
+.totop svg{position:relative;width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s}
+.totop:hover svg{transform:translateY(-3px)}
+.chat-fab{display:flex;align-items:center;gap:.6rem;border:0;cursor:pointer;color:var(--on-accent);font:700 .95rem var(--f-body);padding:.85rem 1.2rem .85rem 1rem;border-radius:999px;background:linear-gradient(100deg,var(--blue),var(--cyan));box-shadow:0 14px 40px -10px rgba(53,208,255,.7);position:relative;transition:transform .25s}
+.chat-fab:hover{transform:translateY(-2px)}
+.chat-fab::after{content:"";position:absolute;inset:0;border-radius:inherit;border:2px solid var(--cyan);animation:ping 2.6s ease-out infinite}
+@keyframes ping{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.35);opacity:0}}
+.chat-fab svg{width:22px;height:22px;stroke:var(--on-accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.chat-fab.open::after{display:none}
+.chat{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:75;width:min(390px,calc(100vw - 32px));height:min(600px,calc(100svh - 120px));display:flex;flex-direction:column;border:1px solid rgba(53,208,255,.35);border-radius:22px;background:var(--chat-bg);box-shadow:0 30px 80px -20px var(--shadow),0 0 60px -20px rgba(47,123,255,.6);overflow:hidden;transform-origin:bottom right;animation:pop .35s cubic-bezier(.2,.8,.2,1)}
+.chat[hidden]{display:none}
+@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.92)}to{opacity:1;transform:none}}
+.chat-h{display:flex;align-items:center;gap:.8rem;padding:.9rem 1rem;border-bottom:1px solid var(--line);background:var(--tint-2)}
+.chat-h img{width:40px;height:40px;border-radius:50%}
+.chat-h b{display:block;font-family:var(--f-display);font-size:1rem;line-height:1.2}
+.chat-h small{display:flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.78rem}
+.chat-h small::before{content:"";width:8px;height:8px;border-radius:50%;background:#3ddc97;box-shadow:0 0 8px #3ddc97}
+.chat-x{margin-left:auto;background:none;border:1px solid var(--line);color:var(--fg);width:36px;height:36px;border-radius:10px;cursor:pointer;font-size:1.1rem}
+.msgs{flex:1;min-height:0;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.7rem;overscroll-behavior:contain}
+.m{max-width:88%;padding:.7rem .95rem;border-radius:16px;font-size:.93rem;line-height:1.5;overflow-wrap:anywhere;animation:msgin .3s cubic-bezier(.2,.8,.2,1)}
+@keyframes msgin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.m.bot{align-self:flex-start;background:var(--tint);border:1px solid var(--line);border-bottom-left-radius:5px}
+.m.me{align-self:flex-end;background:linear-gradient(100deg,var(--blue),#2aa8ff);color:var(--on-accent);font-weight:600;border-bottom-right-radius:5px}
+.m a{color:var(--cyan);font-weight:700}
+.m.bot p+p{margin-top:.5rem}
+.typing{display:flex;gap:5px;align-items:center;padding:.85rem 1rem}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--cyan);animation:blink 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes blink{0%,80%,100%{opacity:.25;transform:none}40%{opacity:1;transform:translateY(-4px)}}
+.quick{display:flex;flex-wrap:wrap;gap:.4rem;padding:0 1rem .7rem}
+.quick button{font:600 .8rem var(--f-body);color:var(--quick-fg);background:var(--tint);border:1px solid var(--line);border-radius:999px;padding:.45rem .8rem;cursor:pointer;transition:background .2s,border-color .2s}
+.quick button:hover{background:var(--tint);border-color:var(--cyan)}
+.chat-f{display:flex;gap:.5rem;padding:.7rem;border-top:1px solid var(--line);background:var(--chat-f-bg)}
+.chat-f input{flex:1;min-width:0;background:var(--input-bg);border:1px solid var(--line);border-radius:999px;color:var(--fg);padding:.7rem 1rem;font:500 .95rem var(--f-body)}
+.chat-f input::placeholder{color:var(--muted)}
+.chat-f button{border:0;border-radius:50%;width:44px;height:44px;cursor:pointer;background:linear-gradient(100deg,var(--blue),var(--cyan));display:grid;place-items:center}
+.chat-f button svg{width:20px;height:20px;stroke:var(--on-accent);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.wform{display:flex;flex-direction:column;gap:.5rem;margin-top:.6rem}
+.wform input,.wform textarea{width:100%;background:var(--input-bg);border:1px solid var(--line);border-radius:10px;color:var(--fg);padding:.55rem .7rem;font:500 .9rem var(--f-body)}
+.wform textarea{min-height:84px;resize:vertical}
+.wform .row{display:flex;flex-wrap:wrap;gap:.5rem}
+.wform .btn{padding:.55rem 1rem;font-size:.85rem}
+@media(max-width:560px){
+  .chat{right:0;left:0;bottom:0;width:100%;height:min(86svh,640px);border-radius:22px 22px 0 0;padding-bottom:env(safe-area-inset-bottom,0px)}
+  .chat-fab span{display:none}.chat-fab{padding:.9rem}
+}
+@media(prefers-reduced-motion:reduce){.chat-fab::after,.chat,.m,.typing i{animation:none!important}}
+/* reveal */
+.js .rv{opacity:0;transform:translateY(34px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}
+@media(prefers-reduced-motion:reduce){
+  [data-speed],.glow{translate:none!important}
+  .nav,.menu li{animation:none!important}
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .js .rv{opacity:1;transform:none}
+}
+</style>
+
+<div class="glow"></div><div class="glow b"></div>
+<canvas id="bg" aria-hidden="true"></canvas>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="KIVO home"><img src="assets/logo.jpg" alt="KIVO logo" width="38" height="38">KIVO</a>
+    <div class="nav-r">
+    <ul class="menu" id="menu">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a class="cta" href="#contact">Contact</a></li>
+    </ul>
+    <button class="theme-toggle" id="theme" type="button" aria-label="Switch to light theme" title="Toggle light / dark theme"><svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">&#9776;</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" style="padding-block-end:clamp(48px,8vw,100px)">
+    <div class="wrap">
+      <div class="hero-copy" data-speed="0.06">
+        <div class="eyebrow">Software &middot; Business &middot; Solutions</div>
+        <h1 aria-label="We build software that runs your business"><span class="w">We</span> <span class="w">build</span> <span class="w">software</span> <span class="w">that</span> <span class="w grad">runs</span> <span class="w grad">your&nbsp;business.</span></h1>
+        <p class="lede">Turning ideas into real solutions. KIVO builds web and mobile apps, cloud solutions and automation that take the busywork out of running your business.</p>
+        <p class="script">Build. Automate. <span class="grad">Grow Together.</span></p>
+        <div class="btns">
+          <a class="btn primary" href="#projects">See our projects &rarr;</a>
+          <a class="btn ghost" href="#contact">Work with us</a>
+        </div>
+      </div>
+      <div class="disc" data-speed="-0.12" aria-hidden="false">
+        <div class="ring"><i></i></div><div class="ring r2"><i></i></div>
+        <img src="assets/logo.jpg" alt="KIVO Software Business Solutions logo" width="400" height="400">
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track" id="track"></div>
+  </div>
+
+  <section id="about" class="about">
+    <div class="about-split">
+      <div class="about-text">
+        <div class="head rv" data-speed="0.04">
+          <div class="eyebrow">About KIVO</div>
+          <h2>Software and automation for the way you work.</h2>
+          <p>KIVO is a software business solutions studio. We turn ideas into real solutions: simple tools that take over the daily jobs of your business, so anyone on your team can use them without training.</p>
+        </div>
+        <div class="stack">
+          <article class="card rv">
+            <div class="ico"><svg viewBox="0 0 24 24"><rect x="2.5" y="4" width="19" height="16" rx="3"/><path d="M10 9.5L7.5 12l2.5 2.5M14 9.5l2.5 2.5-2.5 2.5"/></svg></div>
+            <h3>Web and Mobile Applications</h3>
+            <p>Fast, easy-to-use websites and apps for selling, booking, invoicing and running your daily work.</p>
+          </article>
+          <article class="card rv">
+            <div class="ico"><svg viewBox="0 0 24 24"><path d="M7 18a4.5 4.5 0 01-.6-8.96A6 6 0 0118 10.5 3.75 3.75 0 0117.25 18z"/></svg></div>
+            <h3>Cloud and Hosting Solutions</h3>
+            <p>Your system online and ready, with reliable hosting so your team and customers can reach it anytime.</p>
+          </article>
+          <article class="card rv">
+            <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1"/></svg></div>
+            <h3>Business Process Automation</h3>
+            <p>Excel and software workflows that calculate, check and print for you: billing, statements, payroll and reports.</p>
+          </article>
+          <article class="card rv">
+            <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 2.5l8 3v6c0 4.7-3.2 8.4-8 10-4.8-1.6-8-5.3-8-10v-6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div>
+            <h3>IT Support and Maintenance</h3>
+            <p>Help when something breaks, plus updates and regular care so your systems keep running smoothly.</p>
+          </article>
+          <article class="card rv">
+            <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><rect x="4.5" y="13" width="3.5" height="6" rx=".6"/><rect x="10.25" y="9.5" width="3.5" height="9.5" rx=".6"/><rect x="16" y="5.5" width="3.5" height="13.5" rx=".6"/></svg></div>
+            <h3>Custom Software Development</h3>
+            <p>Software built around the way your business works, from the first idea to a finished tool you own.</p>
+          </article>
+        </div>
+        <div class="erson-block rv">
+          <div class="eyebrow">The person behind KIVO</div>
+          <h3>Erson Mangaliman</h3>
+          <div class="role">Software Engineer</div>
+          <p>I am the software engineer behind KIVO. I design and build the apps, spreadsheet systems and promo videos you see on this page, from the first idea to the finished product.</p>
+          <p>I like software that feels obvious to use. If a shop owner or an office clerk can learn it in a few minutes and save hours every week, it did its job.</p>
+          <ul class="chips"><li>Software engineering</li><li>Web and mobile apps</li><li>Excel automation</li><li>Motion design</li></ul>
+          <div class="btns"><a class="btn primary" href="mailto:erson.mangaliman9@gmail.com">Email Erson</a></div>
+        </div>
+      </div>
+      <div class="shot">
+        <img src="assets/erson.jpg" alt="Portrait of Erson Mangaliman, Software Engineer at KIVO" width="498" height="660">
+        <div class="tagline" data-speed="0.1"><strong>Erson Mangaliman</strong><span>Software Engineer &middot; KIVO</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="head rv" data-speed="0.05">
+        <div class="eyebrow">Projects</div>
+        <h2>Things we have built.</h2>
+        <p>Two recent projects, each with the promo video we made for it. Press play to watch.</p>
+      </div>
+
+      <article class="project">
+        <div class="pcopy rv">
+          <span class="tag">App &middot; Live</span>
+          <h3>Bizora</h3>
+          <p>An all-in-one app for Filipino small businesses. Record a sale in 3 taps, send invoices and receipts in seconds, keep an eye on stock and track what you spend, all in one place.</p>
+          <ul class="chips"><li>Sales</li><li>Invoices</li><li>Stock alerts</li><li>Expenses</li><li>GCash &middot; Maya &middot; Cash</li></ul>
+          <div class="btns"><a class="btn primary" href="https://bizora-ph.vercel.app" target="_blank" rel="noopener">Visit Bizora &nearr;</a></div>
+        </div>
+        <div class="media rv d1" data-speed="-0.07">
+          <div class="media-col">
+            <div class="frame phone"><video id="v-bizora" src="assets/bizora.mp4" poster="assets/bizora-poster.jpg" controls muted loop playsinline preload="metadata"></video></div>
+            <p class="hint">Bizora promo reel</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="project flip">
+        <div class="pcopy rv">
+          <span class="tag">Excel system &middot; Law office</span>
+          <h3>Billing and SOA Automation</h3>
+          <p>An Excel workbook that ends the chase through messy spreadsheets. Enter each client once, log the billings and payments, then pick a client and a month to get a ready-to-print Statement of Account with previous balance, current charges, payments and total outstanding.</p>
+          <ul class="chips"><li>Excel</li><li>Client records</li><li>Statement of Account</li><li>Print or save as PDF</li></ul>
+          <div class="btns"><a class="btn ghost" href="#contact">Ask about this system</a></div>
+        </div>
+        <div class="media rv d1" data-speed="-0.07">
+          <div class="media-col">
+            <div class="frame wide"><video id="v-soa" src="assets/billing-soa.mp4" poster="assets/billing-poster.jpg" controls muted loop playsinline preload="metadata"></video></div>
+            <p class="hint">Billing SOA promo</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="contact" style="padding-top:0">
+    <div class="wrap">
+      <div class="contact rv" data-speed="-0.04">
+        <div class="eyebrow">Contact</div>
+        <h2>Have an idea to <span class="grad">build?</span></h2>
+        <p class="lede">Let's work together to build your next big idea.</p>
+        <div class="mail">
+          <a class="addr" id="addr" href="mailto:erson.mangaliman9@gmail.com">erson.mangaliman9@gmail.com</a>
+          <button class="btn ghost copy" id="copy" type="button">Copy email</button>
+        </div>
+        <div class="links">
+          <a class="btn primary" href="mailto:erson.mangaliman9@gmail.com">Send an email</a>
+          <a class="btn ghost" href="https://bizora-ph.vercel.app" target="_blank" rel="noopener">bizora-ph.vercel.app &nearr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; <span id="yr">2026</span> KIVO Software Business Solutions</span>
+    <span>Built by Erson Mangaliman &middot; <a href="mailto:erson.mangaliman9@gmail.com">erson.mangaliman9@gmail.com</a></span>
+  </div>
+</footer>
+
+
+<div class="fab-wrap">
+  <button class="totop" id="totop" type="button" aria-label="Scroll back to top"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+  <button class="chat-fab" id="chatfab" type="button" aria-expanded="false" aria-controls="chat"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 01-11.6 7.1L4 20l1-4.6A8 8 0 1121 12z"/></svg><span>Ask KIVO</span></button>
+</div>
+<section class="chat" id="chat" hidden aria-label="KIVO assistant" style="padding:0">
+  <div class="chat-h">
+    <img src="assets/logo.jpg" alt="" width="40" height="40">
+    <div><b>KIVO Assistant</b><small>Ask about our services and projects</small></div>
+    <button class="chat-x" id="chatx" type="button" aria-label="Close assistant">&times;</button>
+  </div>
+  <div class="msgs" id="msgs" role="log" aria-live="polite"></div>
+  <div class="quick" id="quick"></div>
+  <form class="chat-f" id="cform" autocomplete="off">
+    <input id="cinput" type="text" placeholder="Type your question..." aria-label="Type your question" maxlength="300">
+    <button type="submit" aria-label="Send"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  </form>
+</section>
+<script>
+(function(){
+  document.documentElement.classList.add('js');
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* marquee */
+  var items=['Web and mobile apps','Cloud and hosting','Business process automation','IT support and maintenance','Custom software development','Motion design'];
+  var track=document.getElementById('track'),html='';
+  for(var r=0;r<2;r++){for(var i=0;i<items.length;i++){html+='<span>'+items[i]+'</span>';}}
+  track.innerHTML=html+html;
+
+  /* theme toggle */
+  var tbtn=document.getElementById('theme'),root=document.documentElement,tmeta=document.querySelector('meta[name=theme-color]');
+  function setTheme(t,save){
+    root.setAttribute('data-theme',t);
+    tbtn.setAttribute('aria-label',t==='light'?'Switch to dark theme':'Switch to light theme');
+    if(tmeta)tmeta.content=t==='light'?'#f4f7fd':'#040813';
+    if(save){try{localStorage.setItem('kivo-theme',t);}catch(e){}}
+    window.dispatchEvent(new CustomEvent('kivo-theme',{detail:t}));
+  }
+  tbtn.setAttribute('aria-label',root.getAttribute('data-theme')==='light'?'Switch to dark theme':'Switch to light theme');
+  tbtn.addEventListener('click',function(){
+    root.classList.add('theme-anim');
+    setTheme(root.getAttribute('data-theme')==='light'?'dark':'light',true);
+    setTimeout(function(){root.classList.remove('theme-anim');},450);
+  });
+
+  /* menu */
+  var burger=document.getElementById('burger'),menu=document.getElementById('menu');
+  burger.addEventListener('click',function(){var o=menu.classList.toggle('open');burger.setAttribute('aria-expanded',o);});
+  menu.addEventListener('click',function(e){if(e.target.tagName==='A'){menu.classList.remove('open');burger.setAttribute('aria-expanded','false');}});
+
+  /* reveal */
+  var rv=[].slice.call(document.querySelectorAll('.rv'));
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+    rv.forEach(function(el){io.observe(el);});
+  }
+  setTimeout(function(){rv.forEach(function(el){el.classList.add('in');});},3500);
+
+  /* card spotlight */
+  document.querySelectorAll('.card').forEach(function(c){
+    c.addEventListener('pointermove',function(e){var b=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-b.left)+'px');c.style.setProperty('--my',(e.clientY-b.top)+'px');});
+  });
+
+  /* copy email */
+  var copy=document.getElementById('copy'),addr=document.getElementById('addr');
+  copy.addEventListener('click',function(){
+    var t='erson.mangaliman9@gmail.com';
+    function done(){copy.textContent='Copied';setTimeout(function(){copy.textContent='Copy email';},1800);}
+    function fallback(){var s=window.getSelection(),r=document.createRange();r.selectNodeContents(addr);s.removeAllRanges();s.addRange(r);copy.textContent='Selected - press copy';}
+    try{navigator.clipboard.writeText(t).then(done,fallback);}catch(err){fallback();}
+  });
+  document.getElementById('yr').textContent=new Date().getFullYear();
+
+  /* videos: play muted when visible, pause when away */
+  var vids=[].slice.call(document.querySelectorAll('video'));
+  if('IntersectionObserver' in window){
+    var vio=new IntersectionObserver(function(es){es.forEach(function(e){
+      var v=e.target;
+      if(e.isIntersecting&&!reduce){var p=v.play();if(p&&p.catch)p.catch(function(){});}
+      else if(!v.dataset.user){v.pause();}
+    });},{threshold:.55});
+    vids.forEach(function(v){
+      v.addEventListener('volumechange',function(){if(!v.muted)v.dataset.user='1';});
+      vio.observe(v);
+    });
+  }
+
+  /* navbar + parallax */
+  var nav=document.querySelector('.nav'),root=document.documentElement;
+  var pEls=[].slice.call(document.querySelectorAll('[data-speed]')),glows=[].slice.call(document.querySelectorAll('.glow'));
+  var spy=[].slice.call(document.querySelectorAll('.menu a[href^="#"]')).map(function(a){return {a:a,sec:document.querySelector(a.getAttribute('href'))};}).filter(function(x){return x.sec;});
+  var lastY=window.pageYOffset,tick=false,cur=null;
+  function frame(){
+    tick=false;
+    var y=window.pageYOffset,vh=window.innerHeight,max=Math.max(1,document.documentElement.scrollHeight-vh);
+    nav.style.setProperty('--p',Math.min(1,y/max).toFixed(4));
+    var sc=y>24;nav.classList.toggle('scrolled',sc);root.classList.toggle('scrolled',sc);
+    var menuOpen=menu.classList.contains('open');
+    if(y>360&&y>lastY+4&&!menuOpen){nav.classList.add('hide');}else if(y<lastY-4||y<=360||menuOpen){nav.classList.remove('hide');}
+    lastY=y;
+    var best=null,bd=1e9;
+    spy.forEach(function(x){var r=x.sec.getBoundingClientRect();if(r.top<vh*.45&&r.bottom>vh*.3){var d=Math.abs(r.top);if(d<bd){bd=d;best=x;}}});
+    if(best!==cur){spy.forEach(function(x){x.a.classList.toggle('active',x===best);});cur=best;}
+    if(reduce)return;
+    pEls.forEach(function(el){
+      var r=el.getBoundingClientRect();
+      if(r.bottom<-400||r.top>vh+400)return;
+      var prev=parseFloat(el._py||0),center=r.top+r.height/2-prev;
+      var py=(center-vh/2)*parseFloat(el.dataset.speed);
+      py=Math.max(-90,Math.min(90,py));
+      el._py=py;el.style.setProperty('--py',py.toFixed(1)+'px');
+    });
+    glows.forEach(function(g,i){g.style.setProperty('--gy',(y*(i?-.12:.18)).toFixed(1)+'px');});
+  }
+  function req(){if(!tick){tick=true;requestAnimationFrame(frame);}}
+  window.addEventListener('scroll',req,{passive:true});window.addEventListener('resize',req);
+  frame();
+
+  /* circuit traces */
+  var cv=document.getElementById('bg'),ctx=cv.getContext('2d');
+  var W,H,dpr,paths=[],G=44,light=document.documentElement.getAttribute('data-theme')==='light';
+  window.addEventListener('kivo-theme',function(e){light=e.detail==='light';});
+  var dirs=[[1,0],[1,1],[0,1],[-1,1],[-1,0],[-1,-1],[0,-1],[1,-1]];
+  function hc(p){return light?(p.hue==='c'?'10,134,184':'31,99,224'):(p.hue==='c'?'53,208,255':'47,123,255');}
+  function rnd(a,b){return a+Math.random()*(b-a);}
+  function build(){
+    paths=[];
+    var n=Math.max(8,Math.min(22,Math.round(W/70)));
+    for(var p=0;p<n;p++){
+      var x=Math.round(rnd(0,W)/G)*G,y=Math.round(rnd(0,H)/G)*G,d=Math.floor(rnd(0,8));
+      var pts=[[x,y]],segs=Math.floor(rnd(4,9));
+      for(var s=0;s<segs;s++){
+        d=(d+[0,0,1,7][Math.floor(rnd(0,4))])%8;
+        var L=Math.floor(rnd(1,4))*G,nx=x+dirs[d][0]*L,ny=y+dirs[d][1]*L;
+        if(nx<-G||nx>W+G||ny<-G||ny>H+G)break;
+        x=nx;y=ny;pts.push([x,y]);
+      }
+      if(pts.length<3)continue;
+      var cum=[0];
+      for(var k=1;k<pts.length;k++){var dx=pts[k][0]-pts[k-1][0],dy=pts[k][1]-pts[k-1][1];cum.push(cum[k-1]+Math.sqrt(dx*dx+dy*dy));}
+      paths.push({pts:pts,cum:cum,len:cum[cum.length-1],t:rnd(-400,0),sp:rnd(70,150),hue:Math.random()<.6?'c':'b'});
+    }
+  }
+  function at(p,d){
+    if(d<=0)return p.pts[0];
+    if(d>=p.len)return p.pts[p.pts.length-1];
+    for(var k=1;k<p.cum.length;k++){if(d<=p.cum[k]){var f=(d-p.cum[k-1])/(p.cum[k]-p.cum[k-1]),a=p.pts[k-1],b=p.pts[k];return [a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f];}}
+    return p.pts[p.pts.length-1];
+  }
+  function size(){
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    W=window.innerWidth;H=window.innerHeight;
+    cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+    build();draw(0);
+  }
+  function draw(dt){
+    ctx.clearRect(0,0,W,H);
+    paths.forEach(function(p){
+      ctx.lineWidth=1;ctx.strokeStyle='rgba('+hc(p)+','+(light?.22:.13)+')';
+      ctx.beginPath();p.pts.forEach(function(q,i){i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]);});ctx.stroke();
+      var a=p.pts[0],z=p.pts[p.pts.length-1];
+      ctx.fillStyle='rgba('+hc(p)+','+(light?.5:.35)+')';
+      [a,z].forEach(function(q){ctx.beginPath();ctx.arc(q[0],q[1],3,0,6.283);ctx.fill();});
+      if(reduce)return;
+      p.t+=p.sp*dt;
+      if(p.t>p.len+260)p.t=rnd(-500,-50);
+      var head=p.t,trail=110,steps=10;
+      for(var s=0;s<steps;s++){
+        var d1=head-trail*(s/steps),d2=head-trail*((s+1)/steps);
+        if(d1<0||d2>p.len)continue;
+        var A=at(p,d1),B=at(p,d2);
+        ctx.strokeStyle='rgba('+hc(p)+','+(0.85*(1-s/steps)).toFixed(2)+')';
+        ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(A[0],A[1]);ctx.lineTo(B[0],B[1]);ctx.stroke();
+      }
+      if(head>0&&head<p.len){var h=at(p,head);ctx.fillStyle=light?'rgba(20,60,160,.95)':'rgba(255,255,255,.95)';ctx.shadowColor='rgb('+hc(p)+')';ctx.shadowBlur=14;ctx.beginPath();ctx.arc(h[0],h[1],2.6,0,6.283);ctx.fill();ctx.shadowBlur=0;}
+    });
+  }
+  var last=0,raf;
+  function loop(ts){var dt=Math.min((ts-last)/1000,.05);last=ts;draw(dt);raf=requestAnimationFrame(loop);}
+  size();
+  var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(size,200);});
+  if(!reduce){raf=requestAnimationFrame(function(ts){last=ts;loop(ts);});
+    document.addEventListener('visibilitychange',function(){if(document.hidden){cancelAnimationFrame(raf);}else{last=performance.now();raf=requestAnimationFrame(loop);}});}
+})();
+</script>
+
+<script>
+(function(){
+  var EMAIL='erson.mangaliman9@gmail.com',BIZ='https://bizora-ph.vercel.app';
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* scroll to top */
+  var top=document.getElementById('totop');
+  function tt(){var y=window.pageYOffset,max=Math.max(1,document.documentElement.scrollHeight-window.innerHeight);top.classList.toggle('show',y>500);top.style.setProperty('--p2',Math.min(1,y/max).toFixed(3));}
+  window.addEventListener('scroll',tt,{passive:true});tt();
+  top.addEventListener('click',function(){window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});});
+
+  /* assistant */
+  var fab=document.getElementById('chatfab'),box=document.getElementById('chat'),msgs=document.getElementById('msgs'),quick=document.getElementById('quick'),form=document.getElementById('cform'),inp=document.getElementById('cinput');
+  var started=false;
+  function scrollEnd(){msgs.scrollTop=msgs.scrollHeight;}
+  function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
+  function fill(p,parts){
+    parts.forEach(function(x,i){
+      if(x==null)return;
+      var para=el('p');
+      (Array.isArray(x)?x:[x]).forEach(function(seg){
+        if(typeof seg==='string'){para.appendChild(document.createTextNode(seg));}
+        else{var a=el('a',null,seg.t);a.href=seg.h;if(seg.h.indexOf('http')===0){a.target='_blank';a.rel='noopener';}para.appendChild(a);}
+      });
+      p.appendChild(para);
+    });
+  }
+  function me(t){var m=el('div','m me',t);msgs.appendChild(m);scrollEnd();}
+  function bot(parts,chips,after){
+    var ty=el('div','m bot typing');ty.innerHTML='<i></i><i></i><i></i>';msgs.appendChild(ty);scrollEnd();
+    setTimeout(function(){
+      ty.remove();var m=el('div','m bot');fill(m,parts);if(after)after(m);msgs.appendChild(m);scrollEnd();setChips(chips);
+    },reduce?0:450);
+  }
+  function setChips(list){
+    quick.textContent='';
+    (list||['Services','Projects','Pricing','Write to Erson']).forEach(function(c){
+      var b=el('button',null,c);b.type='button';b.addEventListener('click',function(){ask(c);});quick.appendChild(b);
+    });
+  }
+  var mail=[{t:EMAIL,h:'mailto:'+EMAIL}];
+  var KB=[
+   {k:['hello','hi','hey','kumusta','good morning','good afternoon','good evening','musta'],a:function(){return [['Hi! I am the KIVO assistant. I can tell you about our services, our projects, how to get started, or help you write to Erson.']];}},
+   {k:['services','service','offer','what do you do','what can you','serbisyo','ginagawa','products'],a:function(){return [['KIVO offers five services:'],['1. Web and Mobile Applications. 2. Cloud and Hosting Solutions. 3. Business Process Automation. 4. IT Support and Maintenance. 5. Custom Software Development.'],['Which one would you like to know more about?']];},c:['Web and mobile apps','Cloud and hosting','Automation','IT support','Custom software']},
+   {k:['web','website','mobile','app','apps','application','applications','webapp'],a:function(){return [['We build fast, easy-to-use websites and mobile apps for selling, booking, invoicing and running your daily work. Bizora is one we built.'],[{t:'See Bizora',h:BIZ}]];}},
+   {k:['cloud','hosting','host','online','server','domain','deploy'],a:function(){return [['Cloud and Hosting Solutions put your system online with reliable hosting, so your team and customers can reach it anytime. Erson can set it up and look after it.']];}},
+   {k:['automation','automate','automated','excel','spreadsheet','workflow','process','vba','macro'],a:function(){return [['Business Process Automation turns repeated office work into Excel or software workflows that calculate, check and print for you, like billing, statements of account, payroll and reports.'],['Our Billing and SOA Automation workbook is an example. Ask me about it.']];},c:['Billing SOA','Pricing','Write to Erson']},
+   {k:['support','maintenance','maintain','fix','broken','bug','update','updates','problem','sira','it support','help desk'],a:function(){return [['IT Support and Maintenance covers help when something breaks, plus updates and regular care so your systems keep running smoothly.']];}},
+   {k:['custom','custom software','tailor','specific','sariling','built for my business'],a:function(){return [['Custom Software Development means software built around how your business works, from the first idea to a finished tool you own. Tell Erson what you need and he will advise on the best approach.']];},c:['Write to Erson','Pricing']},
+   {k:['bizora'],a:function(){return [['Bizora is an all-in-one app for small businesses. You can record a sale in 3 taps, send invoices and receipts in seconds, track stock and expenses, and mark payments as Cash, GCash or Maya.'],[{t:'Open Bizora',h:BIZ}]];}},
+   {k:['billing','soa','statement','statement of account','law office','law','invoice','invoices','singil'],a:function(){return [['Billing and SOA Automation is an Excel workbook for law offices. You enter each client once, log billings and payments, then pick a client and a month to get a ready-to-print Statement of Account with previous balance, current charges, payments and total outstanding. You can print it or save it as PDF.'],['Watch its promo video in the Projects section.']];},c:['Pricing','Write to Erson']},
+   {k:['projects','project','portfolio','work','examples','sample','gawa'],a:function(){return [['Two projects are on this page: Bizora, an app for small businesses, and Billing and SOA Automation, an Excel system for law offices. Both have promo videos you can play in the Projects section.'],[{t:'Go to Projects',h:'#projects'}]];},c:['Bizora','Billing SOA']},
+   {k:['video','videos','promo','motion','animation','animated','reel','reels','ads','advertisement'],a:function(){return [['Yes, KIVO also makes short animated promo videos that explain a product in under a minute, ready for Facebook and Reels. See the two examples in the Projects section.'],[{t:'Watch them',h:'#projects'}]];}},
+   {k:['price','prices','pricing','cost','how much','magkano','rate','rates','quote','quotation','fee','budget','presyo','bayad','free'],a:function(){return [['Prices depend on what you need, so Erson prepares a quote for each project after he hears the details. Send him a short message about your business and what you want to automate or build.']];},c:['Write to Erson','Timeline']},
+   {k:['how long','timeline','time','days','weeks','deadline','gaano katagal','matagal','duration','turnaround','kailan'],a:function(){return [['The time depends on the size of the project. Erson can give you an estimate once he knows what you need.']];},c:['Write to Erson','Pricing']},
+   {k:['start','begin','get started','how to','paano','order','hire','avail','work with','work together','sign up','simulan','request'],a:function(){return [['Getting started is simple:'],['1. Tell Erson about your business and what takes up your time. 2. He replies with questions and a quote. 3. He builds it and you start using it.'],['You can write to him from here.']];},c:['Write to Erson']},
+   {k:['contact','email','mail','reach','message','talk','speak','erson','engineer','owner','who','sino','founder','developer'],a:function(){return [['Erson Mangaliman is the software engineer behind KIVO. You can email him at:'],mail,['Or I can help you write your message.']];},c:['Write to Erson']},
+   {k:['facebook','fb','page','messenger','social'],a:function(){return [['KIVO has a Facebook business page named KIVO. You can also email Erson directly:'],mail];}},
+   {k:['ai','bot','robot','real person','human','are you'],a:function(){return [['I am the KIVO website assistant. I answer common questions about KIVO using the information on this site. For anything specific, Erson replies personally by email:'],mail];}},
+   {k:['thanks','thank','salamat','thank you','ok','okay','great','nice'],a:function(){return [['You are welcome! Anything else you want to ask?']];}}
+  ];
+  function pick(t){
+    var q=' '+t.toLowerCase().replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ')+' ',best=null,bs=0;
+    KB.forEach(function(it){var sc=0;it.k.forEach(function(w){if(q.indexOf(' '+w+' ')>-1)sc+=w.indexOf(' ')>-1?2:1;});if(sc>bs){bs=sc;best=it;}});
+    return best;
+  }
+  var map={'Web and mobile apps':'web and mobile applications','Cloud and hosting':'cloud and hosting','Automation':'business process automation','IT support':'it support and maintenance','Custom software':'custom software development','Billing SOA':'billing soa','Timeline':'how long'};
+  function writeForm(){
+    bot([['Sure. Fill this in and I will prepare an email to Erson for you.']],['Services','Pricing'],function(m){
+      var f=el('div','wform');
+      var n=el('input');n.id='wf-name';n.placeholder='Your name';n.setAttribute('aria-label','Your name');n.maxLength=80;
+      var b=el('input');b.id='wf-biz';b.placeholder='Your business (optional)';b.setAttribute('aria-label','Your business');b.maxLength=100;
+      var t=el('textarea');t.id='wf-msg';t.placeholder='What do you want to build or automate?';t.setAttribute('aria-label','Your message');t.maxLength=800;
+      var row=el('div','row');
+      var open=el('a','btn primary','Open email draft');open.href='mailto:'+EMAIL;
+      var cp=el('button','btn ghost','Copy message');cp.type='button';
+      var note=el('p',null,'');note.style.fontSize='.8rem';
+      function draft(){
+        var name=n.value.trim()||'a visitor',biz=b.value.trim(),msg=t.value.trim()||'I would like to ask about your services.';
+        var body='Hi Erson,\n\n'+msg+'\n\n'+'From: '+name+(biz?' ('+biz+')':'')+'\n';
+        return body;
+      }
+      function sync(){open.href='mailto:'+EMAIL+'?subject='+encodeURIComponent('KIVO inquiry from '+(n.value.trim()||'website visitor'))+'&body='+encodeURIComponent(draft());}
+      [n,b,t].forEach(function(x){x.addEventListener('input',sync);});sync();
+      open.addEventListener('click',function(){note.textContent='If your email app did not open, tap Copy message and send it to '+EMAIL+'.';});
+      cp.addEventListener('click',function(){
+        var txt='To: '+EMAIL+'\n\n'+draft();
+        function ok(){note.textContent='Copied. Paste it in your email to '+EMAIL+'.';}
+        function fb(){t.focus();t.select();note.textContent='Select and copy the text, then email it to '+EMAIL+'.';}
+        try{navigator.clipboard.writeText(txt).then(ok,fb);}catch(e){fb();}
+      });
+      row.appendChild(open);row.appendChild(cp);f.appendChild(n);f.appendChild(b);f.appendChild(t);f.appendChild(row);f.appendChild(note);m.appendChild(f);
+    });
+  }
+  function ask(text){
+    text=text.trim();if(!text)return;
+    me(text);
+    var l=text.toLowerCase();
+    if(l==='write to erson'||/write (to )?erson|message erson|email erson|send (a )?message/.test(l)){writeForm();return;}
+    var key=map[text];var it=pick(key||text);
+    if(!it){bot([['I am not sure about that one. I can help with our services, projects, pricing, or getting started. For anything else, Erson answers personally:'],mail],['Services','Projects','Pricing','Write to Erson']);return;}
+    bot(it.a(),it.c||null);
+  }
+  function openChat(o){
+    var show=o===undefined?box.hidden:o;
+    box.hidden=!show;document.body.classList.toggle('chat-open',show);fab.classList.toggle('open',show);fab.setAttribute('aria-expanded',show);
+    if(show){
+      if(!started){started=true;bot([['Hi! I am the KIVO assistant. Ask me about our services, our projects, pricing, or how to work with Erson.']],null);}
+      setTimeout(function(){inp.focus({preventScroll:true});},60);
+    }
+  }
+  fab.addEventListener('click',function(){openChat();});
+  document.getElementById('chatx').addEventListener('click',function(){openChat(false);fab.focus();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!box.hidden){openChat(false);fab.focus();}});
+  form.addEventListener('submit',function(e){e.preventDefault();var v=inp.value;inp.value='';ask(v);});
+  document.querySelectorAll('a[href="#contact"]').forEach(function(a){a.addEventListener('click',function(){});});
+})();
+</script>
+
+</body></html>
